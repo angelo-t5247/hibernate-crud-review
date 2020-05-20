@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.springbootapp</groupId>
+  <artifactId>Employee-Management-Web-App</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20200519233443</lastUpdated>
+  </versioning>
+</metadata>
