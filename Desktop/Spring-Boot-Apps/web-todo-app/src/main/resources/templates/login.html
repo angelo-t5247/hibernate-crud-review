@@ -17,6 +17,7 @@
 			
 		<div th:if="${message != null}" class="alert alert-danger" th:text="${message}" role="alert"></div>
 		<div th:if="${logout != null}" class="alert alert-success" th:text="${logout}" role="alert"></div>
+		<div th:if="${registerSuccess != null}" class="alert alert-success" th:text="${registerSuccess}" role="alert"></div>
 		<form th:action="@{/login-user}" th:object="${user}" method="post">
 			<div class="form-group">
 				<input type="text" class="form-control mb-4 col-4 rounded-pill"

@@ -8,4 +8,5 @@ import com.springbootapp.model.Todo;
 
 public interface TodoRepository extends JpaRepository<Todo, Integer> {
 	List<Todo> findAllTodosByUsername(String username);
+	Todo findTodoById(int id);
 }

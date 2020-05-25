@@ -35,11 +35,20 @@ public class UserController {
 		if(userService.login(user.getUsername(), user.getPassword()) != null){
 			model.put("user", user);
 			model.addAttribute("todos", todoService.findAllTodosByUsername(user.getUsername()));
-			return "homepage";
+			return "welcome-page";
 		} else {
 			model.addAttribute("message", "Invalid username or password!");
 			return "login";
 		}
+	}
+	
+	@GetMapping("/homepage/{username}")
+	public String showHomepage(@PathVariable String username, Model model) {
+		User user = new User();
+		user.setUsername(username);
+		model.addAttribute("user", user);
+		model.addAttribute("todos", todoService.findAllTodosByUsername(user.getUsername()));
+		return "homepage";
 	}
 	
 	@GetMapping("/register")
@@ -52,7 +61,8 @@ public class UserController {
 	@PostMapping("/registerUser")
 	public String registerUser(@ModelAttribute User user, Model model) {
 		userService.registerUser(user);
-		return "redirect:/";
+		model.addAttribute("registerSuccess", "User Registration Successful! Please Login!");
+		return "login";
 	}
 	
 	@GetMapping("/add-todo/{username}")
@@ -81,4 +91,21 @@ public class UserController {
 		model.addAttribute("logout", "Logout Successful!");
 		return "login";
 	}
+	
+	@GetMapping("/showUpdateForm/{id}")
+	public String showUpdateForm(@PathVariable int id, Model model) {
+		model.addAttribute("todo", todoService.getTodoById(id));
+		return "update-form";
+	}
+	
+	@GetMapping("/delete-todo/{id}")
+	public String deleteTodo(@PathVariable int id, ModelMap model) {
+		Todo todo = new Todo();
+		todo = todoService.findTodoById(id);
+		todoService.deleteTodo(id);
+		model.addAttribute("user", todo);
+		model.addAttribute("todos", todoService.findAllTodosByUsername(todo.getUsername()));
+		return "homepage";
+	}
+	
 }
